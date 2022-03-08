@@ -36,6 +36,8 @@ doInsert(){		#插入文件替换内容
 		else
 			echo -en "\n>>>>文件不在：${FINS_RES}"
 		fi
+	else
+		echo -en '\n>>>>配置文件读取FILE参数失败'
 	fi
 	
 	FILE=""
@@ -53,9 +55,8 @@ echo -en  "\n>>开始进行文件插桩\n"
 OldPath=$(pwd)
 cd "$SHELL_PATH/../../Config/NormalPatchFile"
 NormalPatchFilePath=$(pwd)
+cd "$OldPath"
 
 for file in `find ${NormalPatchFilePath}/*.sh -prune -type f` ;do
 	doInsert "$file"
 done
-
-cd "$OldPath"
