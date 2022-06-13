@@ -88,6 +88,7 @@ echo.
 echo.  恭喜您刷机完成，系统正在重启，如无响应可手动重启。
 echo.
 META-INF\fastboot %* set_active a 
+META-INF\fastboot oem cdms >NUL 2>NUL
 META-INF\fastboot %* reboot 
 echo.***********************************************
 echo.
