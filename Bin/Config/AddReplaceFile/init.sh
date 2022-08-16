@@ -13,12 +13,20 @@ getProp() { grep "$1" "${PROJECT}/system/system/build.prop" | head -1 | cut -d "
 
 AndroidApi=$(getProp 'ro.build.version.sdk')
 
-if [ "$AndroidApi" == '31' ] ; then
+if [ "$AndroidApi" == '33' ] ; then
+	mkdir -p "${SHELL_PATH}/product"
 	if [ ! -d "${SHELL_PATH}/product/data-app" ] && [ -d "${SHELL_PATH}/system/system/data-app" ] ;then
 		mv "${SHELL_PATH}/system/system/data-app" "${SHELL_PATH}/product/data-app"
 	fi
+	if [ ! -d "${SHELL_PATH}/product/media" ] && [ -d "${SHELL_PATH}/system/system/media" ] ;then
+		mv "${SHELL_PATH}/system/system/media" "${SHELL_PATH}/product/media"
+	fi
 else
+	mkdir -p "${SHELL_PATH}/system/system"
 	if [ -d "${SHELL_PATH}/product/data-app" ] && [ ! -d "${SHELL_PATH}/system/system/data-app" ] ;then
 		mv "${SHELL_PATH}/product/data-app" "${SHELL_PATH}/system/system/data-app"
+	fi
+	if [ -d "${SHELL_PATH}/product/media" ] && [ ! -d "${SHELL_PATH}/system/system/media" ] ;then
+		mv "${SHELL_PATH}/product/media" "${SHELL_PATH}/system/system/media"
 	fi
 fi

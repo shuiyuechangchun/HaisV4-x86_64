@@ -7,14 +7,12 @@ getProp() { grep "$1" "${PROJECT}/system/system/build.prop" | head -1 | cut -d "
 
 AndroidApi=$(getProp 'ro.build.version.sdk')
 
-if [ "$AndroidApi" == '31' ] ; then
+if [ "$AndroidApi" == '33' ] ; then
+	${su} sed -i "/services.jar/d" "${SHELL_PATH}/FileConfig.ini"
+	${su} echo -e "/system_ext/framework/miui-services.jar" >> "${SHELL_PATH}/FileConfig.ini"
+elif [ "$AndroidApi" = '32' ] || [ "$AndroidApi" = '31' ] ; then
 	${su} sed -i "/services.jar/d" "${SHELL_PATH}/FileConfig.ini"
 	${su} echo -e "#/system/system/framework/services.jar" >> "${SHELL_PATH}/FileConfig.ini"
-
-elif [ "$AndroidApi" == '32' ] ; then
-	${su} sed -i "/services.jar/d" "${SHELL_PATH}/FileConfig.ini"
-	${su} echo -e "#/system_ext/framework/miui-services.jar" >> "${SHELL_PATH}/FileConfig.ini"
-
 else
 	${su} sed -i "/services.jar/d" "${SHELL_PATH}/FileConfig.ini"
 	${su} echo -e "/system/system/framework/services.jar" >> "${SHELL_PATH}/FileConfig.ini"

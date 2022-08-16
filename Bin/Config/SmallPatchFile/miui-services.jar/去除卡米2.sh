@@ -1,4 +1,4 @@
-SMALI_FILE="/smali/com/miui/server/SecurityManagerService$1.smali"						#文件路径
+SMALI_FILE='/smali/com/miui/server/SecurityManagerService$1.smali'						#文件路径
 FIND_START='.method public run()V'								#解压后要查找的开始代码
 FILE_END='.end method'																	#解压后要查找的结束代码
 
